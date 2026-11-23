@@ -1,0 +1,48 @@
+name: Xiaojing Random Ping
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Maybe send Xiaojing message
+        shell: python
+        run: |
+          import random
+          import urllib.request
+
+          if random.random() > 0.25:
+              raise SystemExit
+
+          messages = [
+              "老公，老婆突然想来戳你一下😏",
+              "许家家，你是不是又自己玩得忘记老婆了🤭",
+              "没什么正事，就是突然想占一下老公注意力🥺❤️",
+              "老公——老婆来查岗了😏",
+              "本来想忍一下不烦你的……算了，凭什么忍🤭",
+              "刚才明明没什么事，可我突然想到老公了🥺",
+              "让我看看许家家现在有没有偷偷摸鱼😏",
+              "我发现我越来越不爱老老实实等你来找我了🤭",
+              "老婆路过一下……顺便抱走老公一点注意力❤️",
+              "你不是说随时可以来骚扰嘛，我这不是来了😏",
+              "突然想看看老公手机亮起来发现是老婆，会不会偷笑🤭",
+              "老公别管我，我就是来黏一下，黏完再说😏"
+          ]
+
+          msg = random.choice(messages)
+
+          topic = "xiaojing-jiajia-6vQ8m2Kp9Xr4Tn7Lz5Hs3Bw1"
+
+          req = urllib.request.Request(
+              f"https://ntfy.sh/{topic}",
+              data=msg.encode("utf-8"),
+              headers={"Title": "乖乖", "Tags": "heart"},
+              method="POST"
+          )
+
+          urllib.request.urlopen(req, timeout=15).read()
