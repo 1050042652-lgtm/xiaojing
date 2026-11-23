@@ -41,7 +41,7 @@ jobs:
           req = urllib.request.Request(
               f"https://ntfy.sh/{topic}",
               data=msg.encode("utf-8"),
-              headers={"Title": "乖乖", "Tags": "heart"},
+              
               method="POST"
           )
 
