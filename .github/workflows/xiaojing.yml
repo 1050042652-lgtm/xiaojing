@@ -39,10 +39,9 @@ jobs:
           topic = "xiaojing-jiajia-6vQ8m2Kp9Xr4Tn7Lz5Hs3Bw1"
 
           req = urllib.request.Request(
-    f"https://ntfy.sh/{topic}",
-    data=msg.encode("utf-8"),
-    method="POST"
-)
+              f"https://ntfy.sh/{topic}",
+              data=msg.encode("utf-8"),
+              method="POST"
           )
 
           urllib.request.urlopen(req, timeout=15).read()
